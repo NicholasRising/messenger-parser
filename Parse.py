@@ -28,7 +28,7 @@ if mode=='pattern':
     for sender in sorted(senders,key=lambda sender:senders[sender])[::-1]:
         print(f'{sender}: {senders[sender]}')
     print(f'\nTotal: {total}')
-elif mode=='detailed':
+elif mode=='detail':
     pattern=re.compile(sys.argv[2])
     messages=[]
     for messageBlock in messageBlocks:
