@@ -9,12 +9,12 @@ TIMEZONE='America/New_York'
 
 messageBlocks=[]
 messageIndex=1
-while os.path.exists(f'message_{messageIndex}.json'):
-    messageBlocks.append(json.load(open(f'message_{messageIndex}.json','r')))
+while os.path.exists(f'{sys.argv[1]}\message_{messageIndex}.json'):
+    messageBlocks.append(json.load(open(f'{sys.argv[1]}\message_{messageIndex}.json','r')))
     messageIndex+=1
-mode=sys.argv[1].lower()
+mode=sys.argv[2].lower()
 if mode=='pattern':
-    pattern=re.compile(sys.argv[2])
+    pattern=re.compile(sys.argv[3])
     senders={}
     total=0
     for messageBlock in messageBlocks:
@@ -29,7 +29,7 @@ if mode=='pattern':
         print(f'{sender}: {senders[sender]}')
     print(f'\nTotal: {total}')
 elif mode=='detail':
-    pattern=re.compile(sys.argv[2])
+    pattern=re.compile(sys.argv[3])
     messages=[]
     for messageBlock in messageBlocks:
         for message in messageBlock['messages']:
@@ -42,7 +42,7 @@ elif mode=='detail':
     for message in messages[::-1]:
         print(message+'\n'+'-'*width)
 elif mode=='user':
-    user=sys.argv[2]
+    user=sys.argv[3]
     messages=[]
     for messageBlock in messageBlocks:
         for message in messageBlock['messages']:
